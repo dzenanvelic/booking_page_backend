@@ -10,7 +10,7 @@ exports.verifyToken = (req, res, next) => {
         return next(errfunc.createError(401, "You are not authenticated"))
     }
 
-    jwt.verify(token, proces.env.JWT, (err, user) => {
+    jwt.verify(token, process.env.JWT, (err, user) => {
         if (err) return next(errfunc.createError(401, "Your token is expired!"))
         req.user = user;
         next()
@@ -19,11 +19,11 @@ exports.verifyToken = (req, res, next) => {
 }
 //verify user or admin allow
 exports.verifyUser = (req, res, next) => {
-    verifyToken(req, res, next, () => {
-        if (req.user.id === req.params.id || req.user.isAdmin) {
-            next()
-        } else {
-            if (err) return next(errfunc.createError(403, "Your are not authorized!"))
-        }
-    })
+
+    if (req.user.id === req.params.id || req.user.isAdmin) {
+        next()
+    } else {
+        return next(errfunc.createError(403, "Your are not authorized!"))
+    }
+
 }

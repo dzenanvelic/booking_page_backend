@@ -11,11 +11,22 @@ const router = express.Router()
 
 //check verifyToken
 router.get('/checkauth', verifyToken, (req, res, next) => {
-    res.send("Hello user you are authenticated")
+    try {
+        res.send("Hello user you are authenticated")
+    } catch (error) {
+        next(error)
+    }
+
 })
 //check verifyUser
-router.get('/checkuser/:id', verifyUser, (req, res, next) => {
-    res.send("Hello user you are allowed to delete user")
+router.get('/checkuser/:id', verifyToken, verifyUser, (req, res, next) => {
+    try {
+        res.send("Hello user you are allowed to delete user")
+    } catch (error) {
+        next(error)
+    }
+
+
 })
 
 
