@@ -3,7 +3,8 @@ const app = express()
 const dotenv = require('dotenv')
 const morgan = require('morgan')
 const mongoose = require('mongoose')
-
+const cookieParser = require('cookie-parser')
+//paths to routes
 const authRoute = require('./routes/auth')
 const hotelsRoute = require('./routes/hotels')
 const roomsRoute = require('./routes/rooms')
@@ -13,7 +14,7 @@ const usersRoute = require('./routes/users')
 dotenv.config()
 app.use(express.json())
 app.use(morgan('dev'))
-
+app.use(cookieParser())
 
 
 
