@@ -12,7 +12,7 @@ router.put('/:id', hotelUpdate)
 router.delete('/:id', hotelDelete)
 //get hotel
 router.get('/:id', getHotel)
-//create hotel
+//get hotels
 router.get('/', getHotels)
 
 
