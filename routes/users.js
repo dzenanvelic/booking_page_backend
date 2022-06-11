@@ -4,7 +4,7 @@
 const express = require('express')
 const { } = require('../controllers.js/hotelcontroller')
 const { userUpdate, userDelete, getUser, getUsers } = require('../controllers.js/usercontroller')
-const { verifyUser, verifyToken } = require('../utils/verifyToken')
+const { verifyUser, verifyToken, verifyAdmin } = require('../utils/verifyToken')
 
 const router = express.Router()
 
@@ -28,6 +28,16 @@ router.get('/checkuser/:id', verifyToken, verifyUser, (req, res, next) => {
 
 
 })
+//check verifyadmin
+router.get('/checkadmin', verifyToken, verifyAdmin, (req, res, next) => {
+    try {
+        res.send("Hello admin you are allowed to delete all")
+    } catch (error) {
+        next(error)
+    }
+
+
+})
 
 
 //update user
@@ -35,9 +45,9 @@ router.put('/:id', verifyUser, userUpdate)
 //delete user
 router.delete('/:id', verifyUser, userDelete)
 //get user
-router.get('/:id', getUser)
+router.get('/:id', verifyUser, getUser)
 //get users
-router.get('/', getUsers)
+router.get('/', verifyAdmin, getUsers)
 
 
 

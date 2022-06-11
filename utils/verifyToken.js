@@ -27,3 +27,11 @@ exports.verifyUser = (req, res, next) => {
     }
 
 }
+//verify admin
+exports.verifyAdmin = (req, res, next) => {
+    if (req.user.isAdmin) {
+        next()
+    } else {
+        return next(errfunc.createError(403, "Your are not authorized!"))
+    }
+}
