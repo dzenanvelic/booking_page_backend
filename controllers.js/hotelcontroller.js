@@ -95,7 +95,7 @@ exports.getHotels = async (req, res) => {
     const { min, max, ...others } = req.query;
 
     try {
-        const hotels = await Hotel.find({ ...others, cheapestPrice: { $gt: min | 1, $lt: max || 999 } }).limit(req.query.limit)
+        const hotels = await Hotel.find({ ...others, cheapestPrice: { $gt: min | 0, $lt: max || 999 } }).limit(req.query.limit)
 
         res.status(200).json(hotels)
     } catch (error) {
