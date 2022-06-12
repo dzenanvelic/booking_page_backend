@@ -9,6 +9,14 @@ const hotelsSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    city: {
+        type: String,
+        required: true
+    },
+    country: {
+        type: String,
+        required: true
+    },
     address: {
         type: String,
         required: true
@@ -23,6 +31,7 @@ const hotelsSchema = new mongoose.Schema({
     },
     photos: {
         type: [String],
+
         required: true
     },
     desc: {
@@ -33,6 +42,11 @@ const hotelsSchema = new mongoose.Schema({
         type: Number,
         min: 1,
         max: 10
+
+    },
+    ratingType: {
+        type: String,
+        default: "Exceptional"
 
     },
     rooms: {
